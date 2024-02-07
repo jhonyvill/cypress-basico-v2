@@ -32,4 +32,15 @@ describe("Customer Service Center TAT", () => {
   it("keeps the phone field empty when a non-numeric value is entered", () => {
     cy.get("#phone").type("abcdefghijklmnopqrstuvwxyz").should("have.text", "");
   });
+
+  it("display error message when phone number is required but is empty", () => {
+    cy.get("#firstName").type("firstName mock");
+    cy.get("#lastName").type("lastName mock");
+    cy.get("#email").type("mock@email.com");
+    cy.get("#phone-checkbox").click();
+    cy.get("#open-text-area").type("test");
+    cy.get('button[type="submit"]').click();
+
+    cy.get(".error").should("be.visible");
+  });
 });
