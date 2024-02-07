@@ -1,4 +1,3 @@
-
 ///<reference types="Cypress"/>
 describe("Customer Service Center TAT", () => {
   beforeEach(() => {
@@ -9,11 +8,13 @@ describe("Customer Service Center TAT", () => {
   });
 
   it("fill in the required fields and submit the form", () => {
-    cy.get('#firstName').type("firstName mock");
-    cy.get('#lastName').type("lastName mock");
-    cy.get('#email').type("mock@email.com");
-    cy.get('#open-text-area').type("text mock");
+    const longText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus eos sint eligendi vel dolore, consequatur voluptate cumque ea numquam consequuntur repellendus, excepturi laborum labore quasi unde et perferendis, harum enim.";
+
+    cy.get("#firstName").type("firstName mock");
+    cy.get("#lastName").type("lastName mock");
+    cy.get("#email").type("mock@email.com");
+    cy.get("#open-text-area").type(longText, { delay: 0 });
     cy.get('button[type="submit"]').click();
-    cy.get('.success').should("be.visible");
+    cy.get(".success").should("be.visible");
   });
 });
