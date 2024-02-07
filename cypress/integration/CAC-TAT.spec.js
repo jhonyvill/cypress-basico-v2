@@ -71,4 +71,9 @@ describe("Customer Service Center TAT", () => {
     cy.get('button[type="submit"]').click();
     cy.get(".error").should("be.visible");
   });
+
+  it("successfully submits the form using a custom command", () => {
+    cy.fillMandatoryFieldsAndSubmit();
+    cy.get(".success").should("be.visible");
+  });
 });
