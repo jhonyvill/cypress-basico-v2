@@ -14,7 +14,7 @@ describe("Customer Service Center TAT", () => {
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("mock@email.com");
     cy.get("#open-text-area").type(longText, { delay: 0 });
-    cy.get('button[type="submit"]').click();
+    cy.contains('button', "Enviar").click();
 
     cy.get(".success").should("be.visible");
   });
@@ -24,7 +24,7 @@ describe("Customer Service Center TAT", () => {
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("test");
     cy.get("#open-text-area").type("test");
-    cy.get('button[type="submit"]').click();
+    cy.contains('button', "Enviar").click();
 
     cy.get(".error").should("be.visible");
   });
@@ -39,7 +39,7 @@ describe("Customer Service Center TAT", () => {
     cy.get("#email").type("mock@email.com");
     cy.get("#phone-checkbox").click();
     cy.get("#open-text-area").type("test");
-    cy.get('button[type="submit"]').click();
+    cy.contains('button', "Enviar").click();
 
     cy.get(".error").should("be.visible");
   });
@@ -68,7 +68,7 @@ describe("Customer Service Center TAT", () => {
   });
 
   it("displays an error message when submitting form without required fields", () => {
-    cy.get('button[type="submit"]').click();
+    cy.contains('button', "Enviar").click();
     cy.get(".error").should("be.visible");
   });
 
