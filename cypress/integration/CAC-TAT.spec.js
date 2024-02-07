@@ -43,4 +43,27 @@ describe("Customer Service Center TAT", () => {
 
     cy.get(".error").should("be.visible");
   });
+
+  it("fill in and clear the name, surname, email and telephone fields", () => {
+    cy.get("#firstName")
+      .type("name mock")
+      .should("have.value", "name mock")
+      .clear()
+      .should("have.value", "");
+    cy.get("#lastName")
+      .type("last name mock")
+      .should("have.value", "last name mock")
+      .clear()
+      .should("have.value", "");
+    cy.get("#email")
+      .type("mock@email.com")
+      .should("have.value", "mock@email.com")
+      .clear()
+      .should("have.value", "");
+    cy.get("#phone")
+      .type("999999999")
+      .should("have.value", "999999999")
+      .clear()
+      .should("have.value", "");
+  });
 });
