@@ -66,4 +66,9 @@ describe("Customer Service Center TAT", () => {
       .clear()
       .should("have.value", "");
   });
+
+  it("displays an error message when submitting form without required fields", () => {
+    cy.get('button[type="submit"]').click();
+    cy.get(".error").should("be.visible");
+  });
 });
