@@ -15,6 +15,7 @@ describe("Customer Service Center TAT", () => {
     cy.get("#email").type("mock@email.com");
     cy.get("#open-text-area").type(longText, { delay: 0 });
     cy.get('button[type="submit"]').click();
+
     cy.get(".success").should("be.visible");
   });
 
@@ -26,5 +27,9 @@ describe("Customer Service Center TAT", () => {
     cy.get('button[type="submit"]').click();
 
     cy.get(".error").should("be.visible");
+  });
+
+  it("keeps the phone field empty when a non-numeric value is entered", () => {
+    cy.get("#phone").type("abcdefghijklmnopqrstuvwxyz").should("have.text", "");
   });
 });
