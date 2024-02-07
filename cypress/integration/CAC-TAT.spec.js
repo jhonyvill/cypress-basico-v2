@@ -17,4 +17,14 @@ describe("Customer Service Center TAT", () => {
     cy.get('button[type="submit"]').click();
     cy.get(".success").should("be.visible");
   });
+
+  it("display error message when submitting the form with an email in invalid format", () => {
+    cy.get("#firstName").type("firstName mock");
+    cy.get("#lastName").type("lastName mock");
+    cy.get("#email").type("test");
+    cy.get("#open-text-area").type("test");
+    cy.get('button[type="submit"]').click();
+
+    cy.get(".error").should("be.visible");
+  });
 });
