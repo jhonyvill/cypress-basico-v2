@@ -94,4 +94,19 @@ describe("Customer Service Center TAT", () => {
       .select(1)
       .should("have.value", "blog");
   });
+  
+  it('checkmark the type of service as "Feedback"', () => {
+    cy.get('input[type="radio"][value="feedback"]')
+      .check()
+      .should("have.value", "feedback");
+  });
+
+  it('checkmark each type of service', () => {
+    cy.get('input[type="radio"]')
+      .should("have.length", 3)
+      .each($radio => {
+        cy.wrap($radio).check();
+        cy.wrap($radio).should("be.checked");
+      });
+  });
 });
