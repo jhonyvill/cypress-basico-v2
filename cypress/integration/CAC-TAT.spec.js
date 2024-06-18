@@ -33,11 +33,11 @@ describe("Customer Service Center TAT", () => {
     cy.get("#phone").type("abcdefghijklmnopqrstuvwxyz").should("have.text", "");
   });
 
-  it("display error message when phone number is required but is empty", () => {
+  it.only("display error message when phone number is required but is empty", () => {
     cy.get("#firstName").type("firstName mock");
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("mock@email.com");
-    cy.get("#phone-checkbox").click();
+    cy.get("#phone-checkbox").check();
     cy.get("#open-text-area").type("test");
     cy.contains('button', "Enviar").click();
 
@@ -108,5 +108,14 @@ describe("Customer Service Center TAT", () => {
         cy.wrap($radio).check();
         cy.wrap($radio).should("be.checked");
       });
+  });
+
+  it('check both checkboxes, then uncheck the last one.', () => {
+    cy.get('input[type="checkbox"]')
+    .check()
+    .should('be.checked')
+    .last()
+    .uncheck()
+    .should('not.be.checked');
   });
 });
