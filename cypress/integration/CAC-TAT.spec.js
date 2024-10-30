@@ -33,7 +33,7 @@ describe("Customer Service Center TAT", () => {
     cy.get("#phone").type("abcdefghijklmnopqrstuvwxyz").should("have.text", "");
   });
 
-  it.only("display error message when phone number is required but is empty", () => {
+  it("display error message when phone number is required but is empty", () => {
     cy.get("#firstName").type("firstName mock");
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("mock@email.com");
@@ -117,5 +117,33 @@ describe("Customer Service Center TAT", () => {
     .last()
     .uncheck()
     .should('not.be.checked');
+  });
+  
+  it('select a file from the fixtures folder.', () => {
+    cy.get('input[type=file]')
+    .should('not.have.value')
+    .selectFile('./cypress/fixtures/example.json')
+    .should(function(input){
+      expect(input[0].files[0].name).to.equal('example.json')
+    });
+  });
+
+  it('select a file by simulating a drag-and-drop.', () => {
+    cy.get('input[type=file]')
+    .should('not.have.value')
+    .selectFile('./cypress/fixtures/example.json', {action: 'drag-drop'})
+    .should(function(input){
+      expect(input[0].files[0].name).to.equal('example.json')
+    });
+  });
+
+  it('select a file using a fixture that has been given an alias.', () => {
+    cy.fixture("example.json").as('sampleFile')
+    cy.get('input[type=file]')
+    .should('not.have.value')
+    .selectFile('@sampleFile')
+    .should(function(input){
+      expect(input[0].files[0].name).to.equal('example.json')
+    });
   });
 });
