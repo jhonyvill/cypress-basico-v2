@@ -146,4 +146,17 @@ describe("Customer Service Center TAT", () => {
       expect(input[0].files[0].name).to.equal('example.json')
     });
   });
+
+  it('check that the privacy policy opens in another tab without the need for a click.', () => {
+    cy.get('#privacy a')
+      .should('have.attr', 'target', '_blank');
+  });
+
+  it('access the privacy policy page by removing the target and then clicking the link.', () => {
+    cy.get('#privacy a')
+      .invoke('removeAttr','target')
+      .click();
+
+      cy.contains('Talking About Testing').should('be.visible');
+  })
 });
