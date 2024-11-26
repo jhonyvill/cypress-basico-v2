@@ -1,5 +1,7 @@
 ///<reference types="Cypress"/>
 describe("Customer Service Center TAT", () => {
+  const THREE_SECONDS_IN_MILLISENCONDS= 3000;
+
   beforeEach(() => {
     cy.visit("./src/index.html");
   });
@@ -10,6 +12,7 @@ describe("Customer Service Center TAT", () => {
   it("fill in the required fields and submit the form", () => {
     const longText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus eos sint eligendi vel dolore, consequatur voluptate cumque ea numquam consequuntur repellendus, excepturi laborum labore quasi unde et perferendis, harum enim.";
 
+    cy.clock();
     cy.get("#firstName").type("firstName mock");
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("mock@email.com");
@@ -17,9 +20,12 @@ describe("Customer Service Center TAT", () => {
     cy.contains('button', "Enviar").click();
 
     cy.get(".success").should("be.visible");
+    cy.tick(THREE_SECONDS_IN_MILLISENCONDS);
+    cy.get(".success").should("not.be.visible");
   });
 
   it("display error message when submitting the form with an email in invalid format", () => {
+    cy.clock();
     cy.get("#firstName").type("firstName mock");
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("test");
@@ -27,6 +33,8 @@ describe("Customer Service Center TAT", () => {
     cy.contains('button', "Enviar").click();
 
     cy.get(".error").should("be.visible");
+    cy.tick(THREE_SECONDS_IN_MILLISENCONDS);
+    cy.get(".error").should("not.be.visible");
   });
 
   it("keeps the phone field empty when a non-numeric value is entered", () => {
@@ -34,6 +42,7 @@ describe("Customer Service Center TAT", () => {
   });
 
   it("display error message when phone number is required but is empty", () => {
+    cy.clock();
     cy.get("#firstName").type("firstName mock");
     cy.get("#lastName").type("lastName mock");
     cy.get("#email").type("mock@email.com");
@@ -42,6 +51,8 @@ describe("Customer Service Center TAT", () => {
     cy.contains('button', "Enviar").click();
 
     cy.get(".error").should("be.visible");
+    cy.tick(THREE_SECONDS_IN_MILLISENCONDS);
+    cy.get(".error").should("not.be.visible");
   });
 
   it("fill in and clear the name, surname, email and telephone fields", () => {
@@ -67,14 +78,20 @@ describe("Customer Service Center TAT", () => {
       .should("have.value", "");
   });
 
-  it("displays an error message when submitting form without required fields", () => {
+  it.only("displays an error message when submitting form without required fields", () => {
+    cy.clock();
     cy.contains('button', "Enviar").click();
     cy.get(".error").should("be.visible");
+    cy.tick(THREE_SECONDS_IN_MILLISENCONDS);
+    cy.get(".error").should("not.be.visible");
   });
 
   it("successfully submits the form using a custom command", () => {
+    cy.clock();
     cy.fillMandatoryFieldsAndSubmit();
     cy.get(".success").should("be.visible");
+    cy.tick(THREE_SECONDS_IN_MILLISENCONDS);
+    cy.get(".success").should("not.be.visible");
   });
 
   it("select a product (YouTube) by its text", () => {
