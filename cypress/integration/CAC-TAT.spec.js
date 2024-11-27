@@ -199,4 +199,14 @@ describe("Customer Service Center TAT", () => {
     .should("have.value", longText);
   })
 
+  it("makes an HTTP request", () => {
+    cy.request("https://cac-tat.s3.eu-central-1.amazonaws.com/index.html")
+    .then((response) => {
+      const {status, statusText, body} = response;
+      expect(status).to.equal(200);
+      expect(statusText).to.equal("OK");
+      expect(body).contain("CAC TAT");
+    });
+  })
+
 });
