@@ -1,4 +1,6 @@
-it('test the privacy policy page independently.', () => {
+Cypress._.times(3, () => {
+    it('test the privacy policy page independently.', () => {
     cy.visit('./src/privacy.html');
     cy.contains('Talking About Testing').should('be.visible');
-})
+    })
+});

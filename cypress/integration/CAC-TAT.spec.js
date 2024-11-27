@@ -78,7 +78,7 @@ describe("Customer Service Center TAT", () => {
       .should("have.value", "");
   });
 
-  it.only("displays an error message when submitting form without required fields", () => {
+  it("displays an error message when submitting form without required fields", () => {
     cy.clock();
     cy.contains('button', "Enviar").click();
     cy.get(".error").should("be.visible");
