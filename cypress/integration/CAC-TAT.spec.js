@@ -176,4 +176,19 @@ describe("Customer Service Center TAT", () => {
 
       cy.contains('Talking About Testing').should('be.visible');
   })
+
+  it('display and hide success and error messages using .invoke()', () => {
+    cy.get(".success")
+      .invoke("show")
+      .should("be.visible")
+      .and("contain","Mensagem enviada com sucesso.")
+      .invoke("hide")
+      .should("not.be.visible");
+    cy.get(".error")
+      .invoke("show")
+      .should("be.visible")
+      .and("contain","Valide os campos obrigatórios!")
+      .invoke("hide")
+      .should("not.be.visible");
+  })
 });
