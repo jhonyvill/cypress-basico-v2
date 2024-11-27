@@ -191,4 +191,12 @@ describe("Customer Service Center TAT", () => {
       .invoke("hide")
       .should("not.be.visible");
   })
+
+  it("fills the text area using the invoke command", () => {
+    const longText = Cypress._.repeat("0123456789", 20);
+    cy.get("#open-text-area")
+    .invoke("val", longText)
+    .should("have.value", longText);
+  })
+
 });
